@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cards</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- result -->
+    <div class="container">
+      <div id="cards" class="cards" style="margin-top: 40px"></div>
+    </div>
+    <script>
+        let cards = document.getElementById("cards");
+        for (let i = 1; i <= Math.floor(localStorage.num); i++) {
+            let card = document.createElement("div");
+            card.className = "card";
+            window.addEventListener("load",()=>{
+            let myTitle = document.querySelectorAll(".title");
+            myTitle[i-1].textContent =`${myTitle[i-1].textContent} ${i}`;
+        })
+        card.innerHTML = window.localStorage.myCard;
+        cards.append(card);
+      }
+    </script>
+  </body>
+</html>

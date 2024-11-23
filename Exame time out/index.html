@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>set time</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button id="start">start</button>
+    <button id="btn">stop</button>
+    <input type="text" id="txt" />
+    <div id="count"></div>
+    <script>
+      let x = document.getElementById("btn");
+      let y = document.getElementById("start");
+      let myDiv = document.getElementById("count");
+      let msg = document.createElement("p");
+      let msg2 = document.createElement("h3");
+      msg.textContent = "your time ended";
+      msg2.textContent = "your Exame is starting now you have 10 sec";
+      let counter = 10;
+
+      x.setAttribute("disabled", "");
+      function countDwon() {
+        let h = setInterval(function () {
+          --myDiv.innerHTML;
+          if (myDiv.innerHTML === "0") {
+            clearInterval(h);
+            myDiv.innerHTML = "";
+          }
+        }, 1000);
+      }
+
+      y.onclick = () => {
+        msg.remove();
+        x.removeAttribute("disabled");
+        myDiv.before(msg2);
+        myDiv.append(counter);
+        countDwon();
+        setTimeout(function () {
+          x.setAttribute("disabled", "");
+          msg2.remove();
+          myDiv.before(msg);
+        }, 10000);
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: sans-serif;
+  }
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Small */
+  @media (min-width: 768px) {
+    .container {
+      width: 750px;
+    }
+  }
+  /* Medium */
+  @media (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+  }
+  /* Large */
+  @media (min-width: 1200px) {
+    .container {
+      width: 1170px;
+    }
+  }
+  .container .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+  }
+  .container .card {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-shadow: 10px 10px 10px #eee;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+  .container .card img {
+    height: calc(100% - 60px);
+    width: 100%;
+  }
+  .container .card .desc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 17px;
+    text-transform: capitalize;
+    text-align: center;
+    line-height: 200%;
+    width: 100%;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: 0.3s linear;
+    overflow: hidden;
+  }
+  .container .card:hover .desc {
+    height: 100%;
+    padding: 20px;
+  }
+  .container .card .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    background-color: #0075ff;
+    padding: 0 10px;
+    height: 60px;
+    color: #ffff;
+    text-transform: capitalize;
+  }
+  .container .card .details .price {
+    font-size: 20px;
+  }
+  /* form  */
+  .form .container {
+    display: flex;
+    padding-top: 30px;
+    margin-bottom: 50px;
+  }
+  .form .container form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .form .container form input {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 17px;
+    width: calc(25% - 20px);
+    margin-right: 20px;
+    border: 1px solid;
+    border-radius: 5px;
+  }
+  .form .container form input:focus {
+    border: none;
+    outline: 2px solid #0075ff;
+  }
+  .form .container form .btn {
+    cursor: pointer;
+    background-color: #009688;
+    color: white;
+    font-size: 25px;
+  }
+  .form .container form .btn:focus {
+    outline: none;
+  }
+  .form .container form .btn:hover {
+    background-color: #0075ff;
+    transition: 0.8s linear;
+  }
+  @media (max-width: 767px) {
+    .form .container form {
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .form .container form input {
+      flex-basis: 100%;
+    }
+  }
+  .form .container form #info {
+    width: 100%;
+    margin-bottom: 40px;
+    padding: 10px;
+    font-size: 20px;
+    text-transform: capitalize;
+    border: 1px solid;
+    border-radius: 5px;
+  }
+  .form .container form #info:focus {
+    border: none;
+    outline: 2px solid #0075ff;
+  }
+  #alert-image {
+    color: red;
+    font-size: 24px;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    display: none;
+  }
+  

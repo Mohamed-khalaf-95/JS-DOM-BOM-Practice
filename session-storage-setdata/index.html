@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sessionStorage setdata</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        input {
+            padding: 14px;
+            border: none;
+            border-radius: 20px;
+            font-size: 20px;
+            background-color: #9ebaf34b;
+        }
+
+        input:focus {
+            outline: 2px solid #009688;
+        }
+
+        select {
+            padding: 14px;
+            border: none;
+            border-radius: 20px;
+            font-size: 20px;
+            text-align: center;
+            background-color: #9ebaf34b;
+        }
+
+        select:focus {
+            outline: 2px solid #009688;
+        }
+
+        #btn {
+            border: none;
+            background-color: #009688;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Information</h1>
+    <form action="" id="myform">
+        <input type="text" placeholder="First Name">
+        <input type="text" placeholder="Last Name">
+        <input type="text" placeholder="E-mail">
+        <select name="numbers" id="numbers">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="submit" value="Done" id="btn">
+    </form>
+
+    <script>
+        let myForm = document.getElementById("myform");
+        let myInputs = document.querySelectorAll("input");
+        let nums = document.getElementById("numbers");
+        let btn = document.getElementById("btn");
+        myForm.addEventListener("input", () => {
+            window.sessionStorage.setItem("first-name", myInputs[0].value);
+            window.sessionStorage.setItem("last-name", myInputs[1].value);
+            window.sessionStorage.setItem("e-mail", myInputs[2].value);
+            window.sessionStorage.setItem("number", nums.value);
+        });
+        if (
+            sessionStorage.getItem("first-name") ||
+            sessionStorage.getItem("last-name") ||
+            sessionStorage.getItem("e-mail") ||
+            sessionStorage.getItem("number")
+        ) {
+            myInputs[0].value = sessionStorage.getItem("first-name");
+            myInputs[1].value = sessionStorage.getItem("last-name");
+            myInputs[2].value = sessionStorage.getItem("e-mail");
+            nums.value = sessionStorage.getItem("number");
+        }
+        btn.onclick = function (e) {
+            e.preventDefault();
+            window.sessionStorage.clear();
+            window.location.reload();
+        };
+
+    </script>
+</body>
+
+</html>

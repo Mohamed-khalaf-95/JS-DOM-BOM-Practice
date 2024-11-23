@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>font colors and size and family set localstorage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        text-transform: capitalize;
+      }
+      body {
+        font-family: "open Sans";
+        color: black;
+        font-size: 16px;
+      }
+      .container {
+        margin-bottom: 50px;
+        padding: 30px;
+      }
+      .boxs {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 40px;
+      }
+      .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        font-weight: bold;
+      }
+      select {
+        width: 100%;
+        font-size: 22px;
+        padding: 15px 0;
+        text-align: center;
+        border: 2px solid black;
+        border-radius: 5px;
+      }
+      select:focus {
+        outline: none;
+      }
+      #content {
+        width: 80%;
+        margin: 0 auto;
+      }
+      label {
+        font-size: 22px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container boxs">
+      <!-- fonts  -->
+      <div class="font-family box-1 box">
+        <label for="fonts" class="fs">Choose Font</label>
+        <select name="fonts" id="fonts">
+          <option value="open sans" id="open-sans" class="open font" selected>
+            Open Sans
+          </option>
+          <option value="cairo" id="cairo" class="cairo font">cairo</option>
+          <option value="roboto" id="roboto" class="roboto font">Roboto</option>
+          <option value="cursive" id="cursive" class="cursive font">
+            cursive
+          </option>
+        </select>
+      </div>
+      <!-- colors  -->
+      <div class="font-color box-2 box">
+        <label for="colors">Choose Color</label>
+        <select name="colors" id="colors">
+          <option class="color" value="black" selected>black</option>
+          <option class="color" value="red">red</option>
+          <option class="color" value="green">green</option>
+          <option class="color" value="blue">blue</option>
+          <option class="color" value="gray">gray</option>
+          <option class="color" value="blueviolet">blueviolet</option>
+        </select>
+      </div>
+      <!-- font size  -->
+      <div class="font-size box-3 box">
+        <label for="size">Choose Font-Size</label>
+        <select name="font-size" id="size">
+          <option value="16" class="font-value" selected>16</option>
+        </select>
+      </div>
+    </div>
+    <!-- content  -->
+
+    <div id="content">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit saepe dicta
+      beatae molestias ut, iure repellat? Nihil maiores maxime fugit assumenda
+      expedita optio cumque? Vitae consequuntur similique deleniti
+    </div>
+    <script>
+      let fSize = document.getElementById("size");
+      let fFamily = document.getElementById("fonts");
+      let fColor = document.getElementById("colors");
+      let clrs = document.querySelectorAll("#colors option");
+      function font_family() {
+        fFamily.addEventListener("change", () => {
+          window.localStorage.setItem("font-family", fFamily.value);
+          document.body.style.fontFamily = fFamily.value;
+        });
+        if (window.localStorage.getItem("font-family")) {
+          fFamily.value = window.localStorage.getItem("font-family");
+          document.body.style.fontFamily =
+            window.localStorage.getItem("font-family");
+        }
+      }
+      function font_size() {
+        for (let i = 17; i <= 30; i++) {
+          let fSizeOpt = document.createElement("option");
+          fSizeOpt.setAttribute("value", i);
+          fSizeOpt.textContent = i;
+          fSize.appendChild(fSizeOpt);
+        }
+        let options = document.querySelectorAll("#size option");
+        options.forEach((els) => {
+          els.style.fontSize = `${els.getAttribute("value")}px`;
+          fSize.addEventListener("change", (e) => {
+            window.localStorage.setItem("font-size", fSize.value);
+            document.body.style.fontSize = `${fSize.value}px`;
+          });
+        });
+        if (window.localStorage.getItem("font-size")) {
+          document.body.style.fontSize = `${window.localStorage.getItem(
+            "font-size"
+          )}px`;
+          fSize.value = window.localStorage.getItem("font-size");
+        }
+      }
+      function font_color() {
+        let allSelecte = document.querySelectorAll("select");
+        clrs.forEach((clr) => {
+          clr.style.color = clr.getAttribute("value");
+        });
+        fColor.addEventListener("change", () => {
+          window.localStorage.setItem("font-color", fColor.value);
+          document.body.style.color = fColor.value;
+          allSelecte.forEach((el) => {
+            el.style.borderColor = fColor.value;
+            el.style.color = fColor.value;
+          });
+        });
+        if (window.localStorage.getItem("font-color")) {
+          fColor.value = window.localStorage.getItem("font-color");
+          document.body.style.color = window.localStorage.getItem("font-color");
+          allSelecte.forEach((el) => {
+            el.style.borderColor = window.localStorage.getItem("font-color");
+            el.style.color = window.localStorage.getItem("font-color");
+          });
+        }
+      }
+      font_size();
+      font_family();
+      font_color();
+    </script>
+  </body>
+</html>

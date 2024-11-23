@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lesson 94-101 A2</title>
+    <style>
+      body {
+        font-family: cursive;
+      }
+      .assign {
+        text-align: center;
+        padding-top: 20px;
+      }
+      .assign input {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ddd;
+      }
+      .assign input:focus {
+        outline: none;
+        border-color: #ccc;
+      }
+      .assign [title="Current"] {
+        font-size: 30px;
+        padding: 20px;
+        margin: 10px auto;
+        width: 610px;
+        background-color: #f1f0f0;
+      }
+      .assign .classes-list {
+        font-size: 30px;
+        padding: 20px;
+        margin: 10px auto;
+        width: 610px;
+        background-color: #f1f0f0;
+      }
+      .assign .classes-list h5 {
+        margin: 0 0 10px;
+        text-align: left;
+      }
+      .assign .classes-list div span {
+        font-size: 20px;
+        background-color: #ff5722;
+        padding: 6px 10px 8px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        border-radius: 6px;
+        color: white;
+        display: inline-flex;
+      }
+      @media (max-width: 768px) {
+        .assign input {
+          width: 90%;
+          margin-bottom: 15px;
+        }
+        .assign [title="Current"] {
+          font-size: 20px;
+          width: 90%;
+        }
+        .assign .classes-list {
+          font-size: 20px;
+          width: 90%;
+        }
+        .assign .classes-list div span {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="assign">
+      <input type="text" class="classes-to-add" placeholder="Add Classes" />
+      <input
+        type="text"
+        class="classes-to-remove"
+        placeholder="Remove Classes"
+      />
+      <div class="element current" title="Current">Current Element</div>
+      <div class="classes-list">
+        <h5>Current Element Class Lists</h5>
+        <div></div>
+      </div>
+    </div>
+    <script>
+      let addInput = document.getElementsByClassName("classes-to-add")[0];
+      let removeInput = document.getElementsByClassName("classes-to-remove")[0];
+      let classListData =
+        document.getElementsByClassName("classes-list")[0].lastElementChild;
+      let cruEle = document.querySelector("[title=Current]");
+      let message = document.createElement("p");
+      message.innerText = "No Classes To Show";
+
+      if (cruEle.classList.length === 0) classListData.appendChild(message);
+      //Append Html Classes in Page
+      for (let i = 0; i < cruEle.classList.length; i++) {
+        let myHtmlClasses = document.createElement("span");
+        myHtmlClasses.className = "my-span";
+        myHtmlClasses.style.background = "green";
+        myHtmlClasses.append(cruEle.classList[i]);
+        classListData.append(myHtmlClasses);
+      }
+      //Add Classes Function-------------------------------------------------
+      addInput.addEventListener("blur", function () {
+        let arrClasses = addInput.value.toLowerCase().split(" ");
+        for (let i = 0; i < arrClasses.length; i++) {
+          if (addInput.value !== "") {
+           
+            let mySpan = document.createElement("span");
+            message.remove();
+            mySpan.className = "my-span";
+            cruEle.classList.add(arrClasses[i]);
+            mySpan.append(arrClasses[i]);
+            classListData.append(mySpan);
+          }
+        }
+      
+        addInput.value = "";
+      });
+      //Remove classes function---------------------------------------------------------------
+      removeInput.addEventListener("blur", function () {
+        let arrClasses = removeInput.value.toLowerCase().split(" ");
+        for (let i = 0; i < arrClasses.length; i++) {
+          //Remove Element From Page
+          for (
+            let j = 0;
+            j < document.querySelectorAll(".my-span").length;
+            j++
+          ) {
+            if (
+              arrClasses[i] ===
+              document.querySelectorAll(".my-span")[j].textContent
+            ) {
+              document.querySelectorAll(".my-span")[j].remove();
+            }
+          }
+          //Remove Classe From Element
+          if (removeInput.value !== "") {
+            cruEle.classList.remove(arrClasses[i]);
+          }
+          // end Main loop
+        }
+        // Show message "No Classes To Show"
+        if (document.querySelectorAll(".my-span").length === 0) {
+          classListData.append(message);
+        }
+        removeInput.value = "";
+      });
+    </script>
+  </body>
+</html>

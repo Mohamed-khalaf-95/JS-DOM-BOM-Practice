@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashbord</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="form">
+      <div class="container">
+        <form action="#container" id="insert-form">
+          <input
+            id="number"
+            type="number"
+            name="elements"
+            class="input"
+            placeholder="Number Of Elements"
+          />
+          <input
+            id="card-heading"
+            type="text"
+            name="title"
+            class="input"
+            placeholder="Elements Title"
+          />
+          <input
+            id="card-price"
+            type="price"
+            name="elements"
+            class="input"
+            placeholder="Enter Price"
+          />
+          <input type="file" id="imag" name="image" />
+         
+          <textarea
+            name="desc"
+            id="info"
+            cols="40"
+            rows="5"
+            placeholder="enter Product description"
+          ></textarea>
+
+          <input
+            type="submit"
+            name="create"
+            value="Create"
+            class="btn"
+            id="btn"
+          />
+          <label for="imag" id="alert-image">please choose image</label>
+        </form>
+        
+      </div>
+    </div>
+    <!-- result -->
+    <div class="container">
+      <div id="cards" class="cards"></div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

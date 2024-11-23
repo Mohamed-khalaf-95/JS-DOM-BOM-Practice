@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Set Color</title>
+    <style>
+      #colors {
+        background-color: #eee;
+        display: flex;
+        justify-content: center;
+
+        padding: 20px;
+        width: 50%;
+        margin: 0 auto 50px;
+      }
+      .color {
+        height: 100px;
+        margin-right: 15px;
+        flex-basis: 25%;
+        cursor: pointer;
+        opacity: 0.4;
+        transition: 0.5s linear;
+      }
+      .color:hover {
+        opacity: 1;
+      }
+      .active {
+        opacity: 1;
+      }
+      #color1 {
+        background-color: red;
+      }
+      #color2 {
+        background-color: green;
+      }
+      #color3 {
+        background-color: blueviolet;
+      }
+      #color4 {
+        background-color: black;
+      }
+      #main {
+        background-color: red;
+        width: 70%;
+        height: 400px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="colors">
+        <div id="color1" data-color="red" class="color active"></div>
+        <div id="color2" data-color="green" class="color"></div>
+        <div id="color3" data-color="blueviolet" class="color"></div>
+        <div id="color4" data-color="black" class="color"></div>
+      </div>
+      <div id="main"></div>
+    </div>
+    <script>
+      let colors = document.querySelectorAll(".color");
+      let mainPage = document.getElementById("main");
+
+      colors.forEach((els) => {
+        els.addEventListener("click", (e) => {
+          // remove active class
+          colors.forEach((el) => {
+            el.classList.remove("active");
+          });
+          // add active class
+          e.currentTarget.classList.add("active");
+          // add curent color to localstorage
+          window.localStorage.setItem("color", e.currentTarget.dataset.color);
+          mainPage.style.backgroundColor = e.currentTarget.dataset.color;
+        });
+      });
+
+      if (window.localStorage.getItem("color")) {
+        mainPage.style.backgroundColor = window.localStorage.getItem("color");
+        // remove active class
+        colors.forEach((el) => {
+          el.classList.remove("active");
+        });
+        // add active class
+        document
+          .querySelector(
+            `[data-color="${window.localStorage.getItem("color")}"]`
+          )
+          .classList.add("active");
+      }
+    </script>
+  </body>
+</html>
